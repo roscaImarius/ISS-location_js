@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <title>Where is ISS?</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="info-sect">
+        <h1>Where is ISS now?</h1>
+        <p>Latitude: <span class="lat"></span> °</p>
+        <p>Longitude: <span class="lon"></span> °</p>
+        <p>Altitude: <span class="alt"></span> Km</p>
+        <p>Velocity: <span class="vel"></span> Km/h</p>
+        <p>Velocity: <span class="vel2"></span> Km/s</p>
+        <button class="center">Center the ISS</button>
+      </div>
+      <div id="mapid"></div>
+    </div>
+    <script src="iss.js"></script>
+  </body>
+</html>
