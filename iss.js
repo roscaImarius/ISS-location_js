@@ -6,8 +6,8 @@ const altitudeSpan = document.querySelector(".alt");
 const velocitySpan = document.querySelector(".vel");
 const velocitySpan2 = document.querySelector(".vel2");
 const btn = document.querySelector(".center");
-
-let firstTime = true;
+let lat;
+let lng;
 
 //ISS icon
 const issIcon = L.icon({
@@ -19,6 +19,14 @@ const issIcon = L.icon({
 let mymap = L.map("mapid").setView([0, 0], 0.5);
 const marker = L.marker([0, 0], { icon: issIcon }).addTo(mymap);
 
+//Leaflet map
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 9,
+  minZoom: 1.5,
+}).addTo(mymap);
+
 // Getting data
 async function getData() {
   //fetch api
@@ -27,17 +35,8 @@ async function getData() {
 
   const { altitude, latitude, longitude, velocity } = data;
   marker.setLatLng([latitude, longitude]);
-  btn.addEventListener("click", () => {
-    mymap.setView([latitude, longitude]);
-  });
-
-  //Leaflet map
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 9,
-    minZoom: 1.5,
-  }).addTo(mymap);
+  lat = latitude;
+  lng = longitude;
 
   //update UI
   latitudeSpan.textContent = latitude.toFixed(4);
@@ -47,6 +46,10 @@ async function getData() {
   velocitySpan2.textContent = (velocity / 3600).toFixed(2);
 }
 
+btn.addEventListener("click", () => {
+  console.log(lat, lng);
+  mymap.setView([lat, lng]);
+});
 setInterval(() => {
   getData();
 }, 1500);
